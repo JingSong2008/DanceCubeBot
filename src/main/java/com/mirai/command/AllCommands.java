@@ -519,7 +519,7 @@ public class AllCommands {
             .form(ArgsCommand.NUMBER)
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 if(args == null) {
-                    contact.sendMessage("格式：\n手机号登录 (手机号)");
+                    contact.sendMessage("格式：手机号登录 (手机号)\n例：手机号登录 100xxxx0000");
                     return;
                 }
                 String number = args[0];
