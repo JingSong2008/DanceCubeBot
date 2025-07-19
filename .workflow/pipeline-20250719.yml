@@ -20,7 +20,7 @@ stages:
       - step: build@gradle
         name: build_gradle
         displayName: Gradle 构建
-        jdkVersion: '17'
+        jdkVersion: '13'
         gradleVersion: '4.4'
         commands:
           - '# Gradle默认构建命令'
