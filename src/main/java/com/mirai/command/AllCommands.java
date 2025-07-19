@@ -87,7 +87,7 @@ public class AllCommands {
     public static final RegexCommand msgMenu = new RegexCommandBuilder()
             .regex("/help")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
-                String menu = "去看看主页图片就知道辣！";
+                String menu = "见：\nhttps://kdocs.cn/l/ccLRaUCuNMX0";
                 contact.sendMessage(menu);
             }).build();
 
