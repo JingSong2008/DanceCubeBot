@@ -13,7 +13,7 @@ mirai {
 }
 repositories {
     maven { 
-        url "https://maven.aliyun.com/nexus/content/repositories/jcenter"
+        url "https://maven.aliyun.com/repository/public"
         allowInsecureProtocol = true
         }
     mavenCentral()
