@@ -12,13 +12,15 @@ mirai {
     jvmTarget = JavaVersion.VERSION_17
 }
 repositories {
-    maven { 
-        url "https://maven.aliyun.com/repository/public"
-        allowInsecureProtocol = true
-        }
+    maven {
+      url 'https://maven.aliyun.com/repository/public/'
+    }
+    maven {
+      url 'https://maven.aliyun.com/repository/central'
+    }
+    mavenLocal()
     mavenCentral()
-
-}
+  }
 dependencies {
     implementation 'com.google.zxing:javase:3.5.1'
     implementation 'com.squareup.okhttp3:okhttp:4.12.0'
