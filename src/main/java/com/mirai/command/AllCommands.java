@@ -93,7 +93,7 @@ public class AllCommands {
 
     @DeclaredCommand("舞立方机器人登录")
     public static final RegexCommand dcLogin = new RegexCommandBuilder()
-            .regex("/dc login")
+            .regex("dc login")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 // 限私聊
                 if(contact instanceof Group) {
@@ -124,7 +124,7 @@ public class AllCommands {
 
     @DeclaredCommand("舞立方机器人退出登录")
     public static final RegexCommand dcLogout = new RegexCommandBuilder()
-            .regex("/dc quit")
+            .regex("dc quit")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 // 限私聊
                 if(contact instanceof Group) {
@@ -150,13 +150,13 @@ public class AllCommands {
     public static final ArgsCommand machineLogin = new ArgsCommandBuilder()
             //Todo：扫不出来
 //            .multiStrings("机台登录")
-            .prefix("/dc jt")
+            .prefix("dc jt")
             .form(ArgsCommand.CHAR)
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
 //                contact.sendMessage("由于协议原因，当前功能暂无法使用");
 //                if(true) return;
                 if(args == null) {
-                    contact.sendMessage("请在QQ扫码后复制链接\n格式：机台登录/dc jt (链接)");
+                    contact.sendMessage("请在QQ扫码后复制链接\n格式：dc jt [链接]");
                 }
 
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
@@ -214,7 +214,7 @@ public class AllCommands {
 
     @DeclaredCommand("借号扫码登录")
     public static final ArgsCommand borrowMachineLogin = new ArgsCommandBuilder()
-            .prefix("/dc jh")
+            .prefix("dc jh")
             .form(ArgsCommand.NUMBER)
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 long friend = 0;
@@ -281,7 +281,7 @@ public class AllCommands {
     @DeclaredCommand("个人信息")
     public static final RegexCommand msgUserInfo = new RegexCommandBuilder()
 //            .regex("个人信息|看看我的|我的信息|我的舞立方|mydc|mywlf")
-            .multiStrings("/dc mydc", "/dc mywlf")
+            .multiStrings("dc mydc", "dc mywlf")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
                 if(token == null) {
@@ -299,7 +299,7 @@ public class AllCommands {
 
     @DeclaredCommand("舞立方自制谱兑换")
     public static final RegexCommand gainMusicByCode = new RegexCommandBuilder()
-            .regex("/dc redeem [a-zA-Z0-9]{15}", false)
+            .regex("[a-zA-Z0-9]{15}", false)
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
                 if(token == null) return;
@@ -326,7 +326,7 @@ public class AllCommands {
     //    @DeclaredCommand("个人信息（旧版）")
     @Deprecated
     public static final RegexCommand msgUserInfoLegacy = new RegexCommandBuilder()
-            .regex("/dc mydc-l")
+            .regex("dc mydc-l")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 getToken(contact, qq);
                 Token token = userTokensMap.get(qq);
@@ -346,7 +346,7 @@ public class AllCommands {
 
     @DeclaredCommand("查找舞立方机台")
     public static final ArgsCommand msgMachineList = new ArgsCommandBuilder()
-            .prefix("/dc search")
+            .prefix("dc search")
             .form(ArgsCommand.CHAR)
             .onCall(Scope.GROUP, (event, contact, qq, args) -> {
                 if(args == null) return;
@@ -403,7 +403,7 @@ public class AllCommands {
     @Deprecated
     @DeclaredCommand("查看其它个人信息")
     public static final ArgsCommand msgOthersInfo = new ArgsCommandBuilder()
-            .prefix("/dc see")
+            .prefix("dc see")
             .form(ArgsCommand.NUMBER)
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 if(args == null) return;
@@ -438,7 +438,7 @@ public class AllCommands {
 
     @DeclaredCommand("战力分析")
     public static final RegexCommand msgUserRatio = new RegexCommandBuilder()
-            .regex("/dc myrt")
+            .regex("dc myrt")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
                 if(token == null) return;
@@ -462,7 +462,7 @@ public class AllCommands {
 
     @DeclaredCommand("成绩查询")
     public static final ArgsCommand msgUserPlayed = new ArgsCommandBuilder()
-            .prefix("/dc myplay")
+            .prefix("dc myplay")
             .form(ArgsCommand.NUMBER)
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
@@ -505,7 +505,7 @@ public class AllCommands {
 
     @DeclaredCommand("ReplyItem") //Todo Beta
     public static final RegexCommand msgReplyItem = new RegexCommandBuilder()
-            .regex("/dc myri")
+            .regex("dc myri")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
                 if(token == null) return;
@@ -515,11 +515,11 @@ public class AllCommands {
 
     @DeclaredCommand("手机号登录")
     public static final ArgsCommand phoneLogin = new ArgsCommandBuilder()
-            .prefix("/dc plogin")
+            .prefix("dc plogin")
             .form(ArgsCommand.NUMBER)
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 if(args == null) {
-                    contact.sendMessage("格式：/dc plogin (手机号)\n例：/dc plogin 100xxxx0000");
+                    contact.sendMessage("格式：/dc plogin (手机号)\n例：dc plogin 100xxxx0000");
                     return;
                 }
                 String number = args[0];
@@ -592,15 +592,15 @@ public class AllCommands {
     }
 
 
-    @DeclaredCommand("登陆")
+//    @DeclaredCommand("登陆")
     // public static final RegexCommand fakeLogin = new RegexCommandBuilder()
     //         .regex("登陆")
     //         .onCall(Scope.USER, (event, contact, qq, args) -> contact.sendMessage("（生气）你当小铃飞机场啊！登陆登陆的...")).build();
 
     @Deprecated
-    @DeclaredCommand("添加指令")
+//    @DeclaredCommand("添加指令")
     public static final ArgsCommand addUserInfoCmd = new ArgsCommandBuilder()
-            .prefix("/dc addcommand")
+            .prefix("dc addcom")
             .form(ArgsCommand.CHAR)
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 if(args == null) {
@@ -616,7 +616,7 @@ public class AllCommands {
     @SuppressWarnings("all")
     @DeclaredCommand("删除指令")
     public static final ArgsCommand delUserInfoCmd = new ArgsCommandBuilder()
-            .prefix("/dc delcom")
+            .prefix("dc delcom")
             .form(ArgsCommand.CHAR)
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 if(args == null) return;
@@ -635,7 +635,7 @@ public class AllCommands {
 
     @DeclaredCommand("发送Token JSON")
     public static final RegexCommand showToken = new RegexCommandBuilder()
-            .regex("/dc #token")
+            .regex("dc #token")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
                 if(token == null) return;
@@ -648,7 +648,7 @@ public class AllCommands {
 
     @DeclaredCommand("发送用户Token JSON")
     public static final ArgsCommand showOthersToken = new ArgsCommandBuilder()
-            .prefix("/dc #token")
+            .prefix("dc #token")
             .form(ArgsCommand.NUMBER)
             .onCall(Scope.ADMIN, (event, contact, qq, args) -> {
                 if(args == null) return;
@@ -664,7 +664,7 @@ public class AllCommands {
 
     @DeclaredCommand("发送默认Token JSON")
     public static final RegexCommand showDefaultToken = new RegexCommandBuilder()
-            .regex("/dc #token0")
+            .regex("dc #token0")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = userTokensMap.get(0L);
                 if(token == null) return;
@@ -677,7 +677,7 @@ public class AllCommands {
 
     @DeclaredCommand("强制刷新Token")
     public static final RegexCommand refreshToken = new RegexCommandBuilder()
-            .regex("/dc #refresh")
+            .regex("dc #refresh")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
                 if(token == null) return;
@@ -692,7 +692,7 @@ public class AllCommands {
     @Deprecated
     @DeclaredCommand("设置默认Token")
     public static final RegexCommand setDefaultToken = new RegexCommandBuilder()
-            .regex("/dc #setToken0")
+            .regex("dc #setToken0")
             .onCall(Scope.ADMIN, (event, contact, qq, args) -> {
                 contact.sendMessage("请发送 Access Token 和 Refresh Token\n使用换行区分token！");
                 EventChannel<Event> channel = GlobalEventChannel.INSTANCE.parentScope(MiraiBot.INSTANCE);
@@ -724,7 +724,7 @@ public class AllCommands {
 
     @DeclaredCommand("热更新") // TODO 刷新
     public static final ArgsCommand hotUpdate = new ArgsCommandBuilder()
-            .prefix("/dc #update")
+            .prefix("dc #update")
             .form(Pattern.compile("all|id|reply"))
             .onCall(Scope.ADMIN, (event, contact, qq, args) -> {
                 if(args == null) return;
@@ -742,7 +742,7 @@ public class AllCommands {
 
     @DeclaredCommand("清空登录等待")//todo 退出登录
     public static final ArgsCommand clearLogin = new ArgsCommandBuilder()
-            .prefix("/dc #clearLogin")
+            .prefix("dc #clearLogin")
             .form(ArgsCommand.WORD)
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 if(args == null) {
@@ -790,7 +790,7 @@ public class AllCommands {
         Token token = userTokensMap.get(qq);
         if(token == null || !token.checkAvailable()) {
             // 登录检测
-            contact.sendMessage("好像还没有登录诶(´。＿。｀)\n私信发送\"/dc login\"一起来玩吧！");
+            contact.sendMessage("好像还没有登录诶(´。＿。｀)\n私信发送\"dc login\"一起来玩吧！");
 //            userInfoCommands.put(qq, new HashSet<>());
             return null;
         }
