@@ -33,14 +33,7 @@ jobs:
     - name: Build with Gradle Wrapper
       run: |
         chmod +x ./gradlew 
-        # 根据项目类型选择构建命令
-        if [ -f "build.gradle.kts" ] || [ -f "build.gradle" ]; then
-          # 标准Java项目
-          ./gradlew clean build
-        else
-          # 尝试构建Spring Boot项目
-          # ./gradlew clean bootJar
-        fi
+        ./gradlew clean build
 
     # 修复路径问题：确保捕获所有JAR文件
     - name: Publish JAR artifacts
