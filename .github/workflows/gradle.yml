@@ -25,14 +25,14 @@ jobs:
     - name: Build with Gradle Wrapper
       run: chmod +x ./gradlew && ./gradlew build
 
-    # NEW: Upload build artifacts
-    - name: Upload build artifacts
+    # Publish JAR artifacts directly
+    - name: Publish JAR artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: build-artifacts
+        name: jar-artifacts
         path: |
           **/build/libs/*.jar
-          **/build/libs/*.war
+        retention-days: 5
 
   dependency-submission:
     runs-on: ubuntu-latest
