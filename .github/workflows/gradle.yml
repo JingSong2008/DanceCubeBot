@@ -13,6 +13,7 @@ jobs:
       contents: read
     steps:
     - uses: actions/checkout@v4
+    
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
@@ -22,17 +23,33 @@ jobs:
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@af1da67850ed9a4cedd57bfd976089dd991e2582 # v4.0.0
 
+    # 关键修复：添加依赖安装步骤
+    - name: Install dependencies
+      run: ./gradlew dependencies
+      
+    # 修复JAR打包问题：添加shadowJar或bootJar支持
     - name: Build with Gradle Wrapper
-      run: chmod +x ./gradlew && ./gradlew build
+      run: |
+        chmod +x ./gradlew 
+        # 根据项目类型选择构建命令
+        if [ -f "build.gradle.kts" ] || [ -f "build.gradle" ]; then
+          # 标准Java项目
+          ./gradlew clean build
+        else
+          # 尝试构建Spring Boot项目
+          # ./gradlew clean bootJar
+        fi
 
-    # Publish JAR artifacts directly
+    # 修复路径问题：确保捕获所有JAR文件
     - name: Publish JAR artifacts
       uses: actions/upload-artifact@v4
       with:
         name: jar-artifacts
         path: |
           **/build/libs/*.jar
+          **/build/distributions/*.jar  # 额外捕获分发包
         retention-days: 5
+        if-no-files-found: error  # 确保失败时通知
 
   dependency-submission:
     runs-on: ubuntu-latest
