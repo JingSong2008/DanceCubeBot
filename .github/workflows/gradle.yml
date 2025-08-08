@@ -31,20 +31,13 @@ jobs:
       
     # 修复JAR打包问题：添加shadowJar或bootJar支持
     - name: Build with Gradle Wrapper
-      run: |
-        chmod +x ./gradlew 
-        ./gradlew clean build
-
-    # 修复路径问题：确保捕获所有JAR文件
-    - name: Publish JAR artifacts
-      uses: actions/upload-artifact@v4
-      with:
-        name: jar-artifacts
-        path: |
-          **/build/libs/*.jar
-          **/build/distributions/*.jar  # 额外捕获分发包
-        retention-days: 5
-        if-no-files-found: error  # 确保失败时通知
+      run: ./gradlew clean build
+        
+    - name: Publish to GitHub Packages
+      run: ./gradlew publish
+      env:
+        USERNAME: ${{ github.actor }}
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   dependency-submission:
     runs-on: ubuntu-latest
