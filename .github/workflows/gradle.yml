@@ -14,10 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    # - name: Generate safe timestamp  # FIXED: Replaced colon/spaces with hyphens
-    #   run: |
-    #     TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d_%H-%M-%S')"
-    #     echo "TIME=$TIME" >> $GITHUB_ENV
+    - name: Generate safe timestamp  # FIXED: Replaced colon/spaces with hyphens
+      run: |
+        TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d_%H-%M-%S')"
+        echo "TIME=$TIME" >> $GITHUB_ENV
         
     - name: Set up JDK 17
       uses: actions/setup-java@v4
