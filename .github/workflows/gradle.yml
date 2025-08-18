@@ -40,10 +40,10 @@ jobs:
     - name: Publish JAR artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: jar-artifacts
+        name: DanceCubeBot-build-${{ env.TIME }}
         path: |
-          **/build/libs/DanceCubeBot-build-${{ env.TIME }}.jar
-          **/build/distributions/DanceCubeBot-build-${{ env.TIME }}.jar
+          **/build/libs/*.jar
+          **/build/distributions/*.jar
         retention-days: 5
         if-no-files-found: error
 
