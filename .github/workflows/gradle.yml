@@ -37,11 +37,8 @@ jobs:
     - name: Build project
       run: ./gradlew clean build
 
-    - name: Make build directory
-      run: mkdir -p build
-      
-    - name: Upload build artifacts
-      uses: actions/upload-artifact@v4.6.2
+    - name: Upload JAR Artifacts
+      uses: actions/upload-artifact@v4
       with:
-        name: DanceCubeBot-build-${{ env.TIME }}  # Now uses safe timestamp (e.g., 2025-08-19_01-03-02)
-        path: ./build/*.jar
+        name: jar-artifacts-${{ env.TIME }}
+        path: build/libs/*.jar
