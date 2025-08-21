@@ -9,7 +9,7 @@ plugins {
 // version = '0.1.0'
 group = 'com.mirai'
 def buildDate = new Date().format("yyyyMMdd")
-version = buildDate
+version = 'build-'+buildDate
 
 mirai {
     jvmTarget = JavaVersion.VERSION_17
