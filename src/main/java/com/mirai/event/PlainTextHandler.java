@@ -96,10 +96,10 @@ public class PlainTextHandler {
         long qq = messageEvent.getSender().getId(); // qq不为contact.getId()
         Contact contact = messageEvent.getSubject(); //发送对象
 
-        if(isMutedNow()) {
-            MUTE.handle(messageEvent, contact, qq, args);
-            if(!adminsSet.contains(qq)) return;
-        }
+        // if(isMutedNow()) {
+        //     MUTE.handle(messageEvent, contact, qq, args);
+        //     if(!adminsSet.contains(qq)) return;
+        // }
 
         if(scopes.contains(Scope.GLOBAL))
             command.onCall(Scope.GLOBAL, messageEvent, contact, qq, args);
