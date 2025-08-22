@@ -75,19 +75,19 @@ public class PlainTextHandler {
 
     }
 
-    private static final MsgHandleable MUTE = (event, contact, qq, args) -> contact.sendMessage("小铃困啦，白天再来玩吧，先晚安安啦~");
+    // private static final MsgHandleable MUTE = (event, contact, qq, args) -> contact.sendMessage("小铃困啦，白天再来玩吧，先晚安安啦~");
 
-    /**
-     * 宵禁
-     *
-     * @return 是否在宵禁
-     */
-    public static boolean isMutedNow() {
-        // 获取当前时间
-        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        // 如果当前时间是 3 点到 4 点，则将 `autoMuted` 设置为 true
-        return hour>=3 && hour<=4;
-    }
+    // /**
+    //  * 宵禁
+    //  *
+    //  * @return 是否在宵禁
+    //  */
+    // public static boolean isMutedNow() {
+    //     // 获取当前时间
+    //     int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+    //     // 如果当前时间是 3 点到 4 点，则将 `autoMuted` 设置为 true
+    //     return hour>=3 && hour<=4;
+    // }
 
     //含参指令
     private static void runCommand(MessageEvent messageEvent, AbstractCommand command, String[] args) {
