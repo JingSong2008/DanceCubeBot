@@ -19,10 +19,6 @@ jobs:
         TIME="$(TZ='Asia/Shanghai' date +'%Y-%m-%d_%H-%M-%S')"
         echo "TIME=$TIME" >> $GITHUB_ENV
 
-    - name: Update plugin.yml version to build timestamp
-      run: |
-        sed -i "s/^version: .*/version: build-${TIME}/" ./src/main/resources/plugin.yml
-
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
