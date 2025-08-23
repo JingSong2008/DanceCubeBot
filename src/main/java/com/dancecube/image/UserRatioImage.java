@@ -298,7 +298,7 @@ public class UserRatioImage {
         float allAvg = (avg1 + avg2) / 2;
         Calendar calendar = lvRatioHistory.getCalendar();
         String extraInfoText = """
-                上次战力：%d   (%d月%d日)
+                上次战力：%d
                 B-15 战力：%.4f
                 R-15 战力：%.4f
                 平均战力：%.5f
