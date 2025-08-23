@@ -240,8 +240,7 @@ public class UserRatioImage {
                         .drawText(musicInfo.getName(), 160 + dx2, 624 + dy2, new TextEffect().setMaxWidth(220))
                         .font(scoreFont).drawText(String.valueOf(musicInfo.getScore()), 160 + dx2, 646 + dy2)
                         .font(comboMissAccFont)
-                        .drawText("%d\n%d\n%.2f%%".formatted(musicInfo.getCombo(), musicInfo.getMiss(), (float) musicInfo.getAccuracy()), 230 + dx2, 725 + dy2,
-                                new TextEffect().setSpaceHeight(1))
+                        .drawText("%d\n%d\n%.2f%%".formatted(musicInfo.getCombo(), musicInfo.getMiss(), (double) musicInfo.getAccuracy()), 230 + dx2, 725 + dy2, new TextEffect().setSpaceHeight(1))
                         .drawText("> %d (%s)".formatted(musicInfo.getRatioInt(), diff), 163 + dx2, 702 + dy2)
                         .font(levelFont, Color.WHITE)
                         .drawText(String.valueOf(musicInfo.getLevel()), 17 + dx2, 747 + dy2);
@@ -277,7 +276,7 @@ public class UserRatioImage {
                         .font(titleFont, Color.BLACK).drawText(musicInfo.getName(), 160 + dx2, 624 + dy2, new TextEffect().setMaxWidth(220)).font(scoreFont)
                         .drawText(String.valueOf(musicInfo.getScore()), 160 + dx2, 646 + dy2)
                         .font(comboMissAccFont)
-                        .drawText("%d\n%d\n%.2f%%".formatted(musicInfo.getCombo(), musicInfo.getMiss(), musicInfo.getAccuracy()),
+                        .drawText("%d\n%d\n%.2f%%".formatted(musicInfo.getCombo(), musicInfo.getMiss(), (float) musicInfo.getAccuracy()),
                                 230 + dx2, 725 + dy2,
                                 new TextEffect().setSpaceHeight(1))
                         .drawText("> %d (%s)".formatted(musicInfo.getRatioInt(), diff), 163 + dx2, 702 + dy2)
