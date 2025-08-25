@@ -85,7 +85,7 @@ public class AllCommands {
 
     @DeclaredCommand("help")
     public static final RegexCommand msgMenu = new RegexCommandBuilder()
-            .multiStrings("菜单", "help")
+            .regex("/help")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 String menu = "去看看主页图片就知道辣！";
                 contact.sendMessage(menu);
@@ -93,7 +93,7 @@ public class AllCommands {
 
     @DeclaredCommand("舞立方机器人登录")
     public static final RegexCommand dcLogin = new RegexCommandBuilder()
-            .multiStrings("登录", "舞立方登录")
+            .regex("/舞立方 登录")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 // 限私聊
                 if(contact instanceof Group) {
@@ -124,7 +124,7 @@ public class AllCommands {
 
     @DeclaredCommand("舞立方机器人退出登录")
     public static final RegexCommand dcLogout = new RegexCommandBuilder()
-            .regex("退出登录")
+            .regex("/舞立方 退出登录")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 // 限私聊
                 if(contact instanceof Group) {
@@ -150,13 +150,13 @@ public class AllCommands {
     public static final ArgsCommand machineLogin = new ArgsCommandBuilder()
             //Todo：扫不出来
 //            .multiStrings("机台登录")
-            .prefix("机台登录", "jt")
+            .prefix("/舞立方 jt")
             .form(ArgsCommand.CHAR)
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
 //                contact.sendMessage("由于协议原因，当前功能暂无法使用");
 //                if(true) return;
                 if(args == null) {
-                    contact.sendMessage("请在QQ扫码后复制链接\n格式：机台登录/jt (链接)");
+                    contact.sendMessage("请在QQ扫码后复制链接\n格式：/舞立方 jt (链接)");
                 }
 
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
@@ -214,7 +214,7 @@ public class AllCommands {
 
     @DeclaredCommand("借号扫码登录")
     public static final ArgsCommand borrowMachineLogin = new ArgsCommandBuilder()
-            .prefix("借号")
+            .prefix("/舞立方 借号")
             .form(ArgsCommand.NUMBER)
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 long friend = 0;
@@ -280,8 +280,8 @@ public class AllCommands {
 
     @DeclaredCommand("个人信息")
     public static final RegexCommand msgUserInfo = new RegexCommandBuilder()
-//            .regex("个人信息|看看我的|我的信息|我的舞立方|mydc|mywlf")
-            .multiStrings("个人信息", "看看我的", "我的信息", "我的舞立方", "mydc", "mywlf")
+           .multiStrings("/舞立方 mydc", "/舞立方 个人信息")
+            // .multiStrings("个人信息", "看看我的", "我的信息", "我的舞立方", "mydc", "mywlf")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
                 if(token == null) {
@@ -299,7 +299,7 @@ public class AllCommands {
 
     @DeclaredCommand("舞立方自制谱兑换")
     public static final RegexCommand gainMusicByCode = new RegexCommandBuilder()
-            .regex("[a-zA-Z0-9]{15}", false)
+            .regex("/舞立方 [a-zA-Z0-9]{15}", false)
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
                 if(token == null) return;
@@ -324,29 +324,29 @@ public class AllCommands {
             }).build();
 
     //    @DeclaredCommand("个人信息（旧版）")
-    @Deprecated
-    public static final RegexCommand msgUserInfoLegacy = new RegexCommandBuilder()
-            .regex("个人信息-l|mydc-l")
-            .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
-                getToken(contact, qq);
-                Token token = userTokensMap.get(qq);
-                UserInfo userInfo;
-                AccountInfo accountInfo;
-                try {
-                    userInfo = scheduler.async(() -> UserInfo.get(token)).get();
-                    accountInfo = scheduler.async(() -> AccountInfo.get(token)).get();
-                } catch(ExecutionException | InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+    // @Deprecated
+    // public static final RegexCommand msgUserInfoLegacy = new RegexCommandBuilder()
+    //         .regex("个人信息-l|mydc-l")
+    //         .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
+    //             getToken(contact, qq);
+    //             Token token = userTokensMap.get(qq);
+    //             UserInfo userInfo;
+    //             AccountInfo accountInfo;
+    //             try {
+    //                 userInfo = scheduler.async(() -> UserInfo.get(token)).get();
+    //                 accountInfo = scheduler.async(() -> AccountInfo.get(token)).get();
+    //             } catch(ExecutionException | InterruptedException e) {
+    //                 throw new RuntimeException(e);
+    //             }
 
-                Image image = HttpUtil.getImageFromURL(userInfo.getHeadimgURL(), contact);
-                String info = "昵称：%s\n战队：%s\n积分：%d\n金币：%d\n战力：%d\n全国排名：%d".formatted(userInfo.getUserName(), userInfo.getTeamName(), userInfo.getMusicScore(), accountInfo.getGold(), userInfo.getLvRatio(), userInfo.getRankNation());
-                contact.sendMessage(image.plus(info));
-            }).build();
+    //             Image image = HttpUtil.getImageFromURL(userInfo.getHeadimgURL(), contact);
+    //             String info = "昵称：%s\n战队：%s\n积分：%d\n金币：%d\n战力：%d\n全国排名：%d".formatted(userInfo.getUserName(), userInfo.getTeamName(), userInfo.getMusicScore(), accountInfo.getGold(), userInfo.getLvRatio(), userInfo.getRankNation());
+    //             contact.sendMessage(image.plus(info));
+    //         }).build();
 
     @DeclaredCommand("查找舞立方机台")
     public static final ArgsCommand msgMachineList = new ArgsCommandBuilder()
-            .prefix("查找舞立方", "查找", "查找机台", "舞立方")
+            .prefix("/舞立方 查找")
             .form(ArgsCommand.CHAR)
             .onCall(Scope.GROUP, (event, contact, qq, args) -> {
                 if(args == null) return;
@@ -379,7 +379,7 @@ public class AllCommands {
             })
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 if(args == null) {
-                    contact.sendMessage("格式：\n查找舞立方 (地区)");
+                    contact.sendMessage("格式：\n/舞立方 查找 (地区)");
                     return;
                 }
 
@@ -403,7 +403,7 @@ public class AllCommands {
     @Deprecated
     @DeclaredCommand("查看其它个人信息")
     public static final ArgsCommand msgOthersInfo = new ArgsCommandBuilder()
-            .prefix("看看你的", "康康你的")
+            .prefix("/舞立方 看看你的")
             .form(ArgsCommand.NUMBER)
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 if(args == null) return;
@@ -438,7 +438,7 @@ public class AllCommands {
 
     @DeclaredCommand("战力分析")
     public static final RegexCommand msgUserRatio = new RegexCommandBuilder()
-            .multiStrings("战力分析", "我的战力", "查看战力", "myrt")
+            .multiStrings("/舞立方 战力分析", "/舞立方 myrt")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
                 if(token == null) return;
@@ -462,7 +462,7 @@ public class AllCommands {
 
     @DeclaredCommand("成绩查询")
     public static final ArgsCommand msgUserPlayed = new ArgsCommandBuilder()
-            .prefix("成绩查询", "查询成绩", "myplay")
+            .prefix("/舞立方 成绩查询", "/舞立方 myplay")
             .form(ArgsCommand.NUMBER)
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
@@ -515,7 +515,7 @@ public class AllCommands {
 
     @DeclaredCommand("手机号登录")
     public static final ArgsCommand phoneLogin = new ArgsCommandBuilder()
-            .prefix("手机号登录", "验证码登录")
+            .prefix("/舞立方 手机号登录")
             .form(ArgsCommand.NUMBER)
             .onCall(Scope.USER, (event, contact, qq, args) -> {
                 if(args == null) {
@@ -592,10 +592,10 @@ public class AllCommands {
     }
 
 
-    @DeclaredCommand("登陆")
-    public static final RegexCommand fakeLogin = new RegexCommandBuilder()
-            .regex("登陆")
-            .onCall(Scope.USER, (event, contact, qq, args) -> contact.sendMessage("（生气）你当小铃飞机场啊！登陆登陆的...")).build();
+    // @DeclaredCommand("登陆")
+    // public static final RegexCommand fakeLogin = new RegexCommandBuilder()
+    //         .regex("登陆")
+    //         .onCall(Scope.USER, (event, contact, qq, args) -> contact.sendMessage("（生气）你当小铃飞机场啊！登陆登陆的...")).build();
 
     @Deprecated
     @DeclaredCommand("添加指令")
