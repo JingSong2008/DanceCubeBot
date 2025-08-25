@@ -324,25 +324,25 @@ public class AllCommands {
             }).build();
 
     //    @DeclaredCommand("个人信息（旧版）")
-    @Deprecated
-    public static final RegexCommand msgUserInfoLegacy = new RegexCommandBuilder()
-            .regex("个人信息-l|mydc-l")
-            .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
-                getToken(contact, qq);
-                Token token = userTokensMap.get(qq);
-                UserInfo userInfo;
-                AccountInfo accountInfo;
-                try {
-                    userInfo = scheduler.async(() -> UserInfo.get(token)).get();
-                    accountInfo = scheduler.async(() -> AccountInfo.get(token)).get();
-                } catch(ExecutionException | InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-
-                Image image = HttpUtil.getImageFromURL(userInfo.getHeadimgURL(), contact);
-                String info = "昵称：%s\n战队：%s\n积分：%d\n金币：%d\n战力：%d\n全国排名：%d".formatted(userInfo.getUserName(), userInfo.getTeamName(), userInfo.getMusicScore(), accountInfo.getGold(), userInfo.getLvRatio(), userInfo.getRankNation());
-                contact.sendMessage(image.plus(info));
-            }).build();
+//    @Deprecated
+//    public static final RegexCommand msgUserInfoLegacy = new RegexCommandBuilder()
+//            .regex("个人信息-l|mydc-l")
+//            .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
+//                getToken(contact, qq);
+//                Token token = userTokensMap.get(qq);
+//                UserInfo userInfo;
+//                AccountInfo accountInfo;
+//                try {
+//                    userInfo = scheduler.async(() -> UserInfo.get(token)).get();
+//                    accountInfo = scheduler.async(() -> AccountInfo.get(token)).get();
+//                } catch(ExecutionException | InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
+//
+//                Image image = HttpUtil.getImageFromURL(userInfo.getHeadimgURL(), contact);
+//                String info = "昵称：%s\n战队：%s\n积分：%d\n金币：%d\n战力：%d\n全国排名：%d".formatted(userInfo.getUserName(), userInfo.getTeamName(), userInfo.getMusicScore(), accountInfo.getGold(), userInfo.getLvRatio(), userInfo.getRankNation());
+//                contact.sendMessage(image.plus(info));
+//            }).build();
 
     @DeclaredCommand("查找舞立方机台")
     public static final ArgsCommand msgMachineList = new ArgsCommandBuilder()
