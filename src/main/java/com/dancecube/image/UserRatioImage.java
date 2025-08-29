@@ -297,13 +297,21 @@ public class UserRatioImage {
         float avg2 = RatioCalculator.average(recent15List);
         float allAvg = (avg1 + avg2) / 2;
         Calendar calendar = lvRatioHistory.getCalendar();
+        // String extraInfoText = """
+        //         上次战力：%d   (%d月%d日)
+        //         B-15 战力：%.4f
+        //         R-15 战力：%.4f
+        //         平均战力：%.5f
+        //         """.formatted(lvRatioHistory.getRatio(),
+        //         calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+        //         avg1, avg2, allAvg) + getRatioComment(lvRatio);
         String extraInfoText = """
-                上次战力：%d   (%d月%d日)
+                上次战力：%d
                 B-15 战力：%.4f
                 R-15 战力：%.4f
                 平均战力：%.5f
                 """.formatted(lvRatioHistory.getRatio(),
-                calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
+                // calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH),
                 avg1, avg2, allAvg) + getRatioComment(lvRatio);
         drawer.font(infoFont).color(Color.BLACK).drawText(extraInfoText, 720, 160, new TextEffect().setSpaceHeight(-6));
         drawer.dispose();
