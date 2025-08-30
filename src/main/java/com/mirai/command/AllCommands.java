@@ -87,8 +87,7 @@ public class AllCommands {
     public static final RegexCommand msgMenu = new RegexCommandBuilder()
             .multiStrings("菜单", "help")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
-                String menu = "去看看主页图片就知道辣！";
-                contact.sendMessage(menu);
+                contact.sendMessage("详见https://www.kdocs.cn/l/ccLRaUCuNMX0。");
             }).build();
 
     @DeclaredCommand("舞立方机器人登录")
