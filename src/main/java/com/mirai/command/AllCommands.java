@@ -80,7 +80,6 @@ public class AllCommands {
                 }
             }
         }
-
     }
 
     @DeclaredCommand("help")
@@ -117,6 +116,7 @@ public class AllCommands {
                 } else {
                     contact.sendMessage("登录成功啦~(●'◡'●)\n你的ID是：%s\n\n⭐要是账号不匹配的话，重新发送登录就好了".formatted(token.getUserId()));
                     userTokensMap.put(qq, token);  // 重复登录只会覆盖新的token
+                    contact.sendMessage("欢迎加入机器人的QQ群聊：908659951。");
                 }
                 logStatus.remove(qq);
             }).build();
@@ -279,7 +279,6 @@ public class AllCommands {
 
     @DeclaredCommand("个人信息")
     public static final RegexCommand msgUserInfo = new RegexCommandBuilder()
-//            .regex("个人信息|看看我的|我的信息|我的舞立方|mydc|mywlf")
             .multiStrings("个人信息", "看看我的", "我的信息", "我的舞立方", "mydc", "mywlf")
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
                 Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
@@ -321,27 +320,6 @@ public class AllCommands {
                 }
                 contact.sendMessage("好像都失效了💦💦\n换几个试试吧！");
             }).build();
-
-    //    @DeclaredCommand("个人信息（旧版）")
-//    @Deprecated
-//    public static final RegexCommand msgUserInfoLegacy = new RegexCommandBuilder()
-//            .regex("个人信息-l|mydc-l")
-//            .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
-//                getToken(contact, qq);
-//                Token token = userTokensMap.get(qq);
-//                UserInfo userInfo;
-//                AccountInfo accountInfo;
-//                try {
-//                    userInfo = scheduler.async(() -> UserInfo.get(token)).get();
-//                    accountInfo = scheduler.async(() -> AccountInfo.get(token)).get();
-//                } catch(ExecutionException | InterruptedException e) {
-//                    throw new RuntimeException(e);
-//                }
-//
-//                Image image = HttpUtil.getImageFromURL(userInfo.getHeadimgURL(), contact);
-//                String info = "昵称：%s\n战队：%s\n积分：%d\n金币：%d\n战力：%d\n全国排名：%d".formatted(userInfo.getUserName(), userInfo.getTeamName(), userInfo.getMusicScore(), accountInfo.getGold(), userInfo.getLvRatio(), userInfo.getRankNation());
-//                contact.sendMessage(image.plus(info));
-//            }).build();
 
     @DeclaredCommand("查找舞立方机台")
     public static final ArgsCommand msgMachineList = new ArgsCommandBuilder()
@@ -572,6 +550,7 @@ public class AllCommands {
 
                     userTokensMap.put(qq, token);
                     contact.sendMessage("登录成功啦~(●'◡'●)\n你的ID是：%s\n\n⭐要是账号不匹配的话，重新登录就好了".formatted(token.getUserId()));
+                    contact.sendMessage("欢迎加入机器人的QQ群聊：908659951。");
                 } catch(InterruptedException | ExecutionException e) {
                     contact.sendMessage("操作故障，请重试");
                 } catch(TimeoutException e) {
