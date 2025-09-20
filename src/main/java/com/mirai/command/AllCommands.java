@@ -119,6 +119,7 @@ public class AllCommands {
                 logStatus.remove(qq);
             }).build();
 
+
     @DeclaredCommand("舞立方机器人退出登录")
     public static final RegexCommand dcLogout = new RegexCommandBuilder()
             .regex("退出登录")

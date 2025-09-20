@@ -4,9 +4,9 @@ import java.sql.*;
 
 public class AuthUtil {
     // MySQL 数据库连接信息
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/bot";
+    private static final String DB_URL = "jdbc:mysql://183.66.27.19:24633/bot";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "Jingsong2008_";
+    private static final String DB_PASSWORD = "Jingsong2008";
 
     public static boolean isUserAuthorized(long userId) {
         String sql = "SELECT 1 FROM authorized_users WHERE user_id = ?";
