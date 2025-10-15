@@ -151,8 +151,6 @@ public class AllCommands {
             .prefix("机台登录", "jt")
             .form(ArgsCommand.CHAR)
             .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
-//                contact.sendMessage("由于协议原因，当前功能暂无法使用");
-//                if(true) return;
                 if(args == null) {
                     contact.sendMessage("请在QQ扫码后复制链接\n格式：机台登录/jt (链接)");
                 }
@@ -285,7 +283,7 @@ public class AllCommands {
                     return;
                 }
 
-                if(token.getUserId() == 660997) contact.sendMessage("😨我娶，迪神！");
+//                if(token.getUserId() == 660997) contact.sendMessage("😨我娶，迪神！");
 
                 InputStream inputStream = UserInfoImage.generate(token, token.getUserId());
                 if(inputStream != null) {

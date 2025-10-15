@@ -133,3 +133,5 @@ src/test/kotlin/RunTerminal.kt
 # Local Test Launch Point working directory
 /debug-sandbox
 /.lingma
+/src/main/java/com/mirai/event/MainHandler1.java
+/src/main/java/com/mirai/auth/

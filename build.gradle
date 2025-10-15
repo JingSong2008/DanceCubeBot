@@ -8,8 +8,10 @@ plugins {
 // group = 'com.mirai'
 // version = '0.1.0'
 group = 'com.mirai'
-def buildDate = new Date().format("yyyyMMdd")
-version = 'build-'+buildDate
+def releaseTime() {
+    return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+08:00"))
+}
+version = 'build-'+releaseTime()
 
 mirai {
     jvmTarget = JavaVersion.VERSION_17
@@ -37,6 +39,9 @@ dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.9.2'
     implementation 'junit:junit:4.13.2'
     implementation 'org.quartz-scheduler:quartz:2.3.2'
-    implementation 'io.github.humbleui:skija-windows-x64:0.116.2'
-    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation "io.github.humbleui:skija-shared:0.116.8"
+    implementation "io.github.humbleui:skija-windows-x64:0.116.8"
+    implementation 'com.mysql:mysql-connector-j:9.4.0'
+    implementation 'com.google.zxing:core:3.5.1'
+    implementation 'com.google.zxing:javase:3.5.1'
 }
