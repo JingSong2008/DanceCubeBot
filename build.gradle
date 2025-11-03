@@ -9,7 +9,7 @@ plugins {
 // version = '0.1.0'
 group = 'com.mirai'
 def releaseTime() {
-    return new Date().format("yyyyMMddHHmm", TimeZone.getTimeZone("GMT+08:00"))
+    return new Date().format("yyyyMMddHHmm",TimeZone.getTimeZone("GMT+08:00"))
 }
 version = 'build-'+releaseTime()
 
@@ -40,8 +40,13 @@ dependencies {
     implementation 'junit:junit:4.13.2'
     implementation 'org.quartz-scheduler:quartz:2.3.2'
     implementation "io.github.humbleui:skija-shared:0.116.8"
-    implementation "io.github.humbleui:skija-windows-x64:0.116.8"
     implementation 'com.mysql:mysql-connector-j:9.4.0'
     implementation 'com.google.zxing:core:3.5.1'
     implementation 'com.google.zxing:javase:3.5.1'
+}
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.5.10'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.5.10'
+
+    id 'net.mamoe.mirai-console' version '2.16.0'
 }

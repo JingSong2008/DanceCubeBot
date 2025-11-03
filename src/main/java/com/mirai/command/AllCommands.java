@@ -3,6 +3,7 @@ package com.mirai.command;
 import com.dancecube.api.Machine;
 import com.dancecube.api.PhoneLoginBuilder;
 import com.dancecube.api.PlayerMusic;
+import com.dancecube.api.CheckIn;
 import com.dancecube.image.LastPlayImage;
 import com.dancecube.image.UserInfoImage;
 import com.dancecube.image.UserRatioImage;
@@ -142,6 +143,24 @@ public class AllCommands {
                     contact.sendMessage("退出登录成功！");
                 }
             }).build();
+
+
+
+//    @DeclaredCommand("签到")
+//    public static final RegexCommand handleCheckIn = new RegexCommandBuilder()
+//            .multiStrings("签到")
+//            .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
+//                Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
+//                if(token == null) return;
+//
+//                boolean success = CheckIn.recordCheckIn(token);
+//                if (success) {
+//                    contact.sendMessage("签到成功啦~(●'◡'●)");
+//                } else {
+//                    contact.sendMessage("签到失败了💦💦\n重试一下吧！");
+//                }
+//            }).build();
+
 
     @Deprecated
     @DeclaredCommand("舞立方机台登录")
