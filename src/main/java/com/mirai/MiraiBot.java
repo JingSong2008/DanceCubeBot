@@ -4,6 +4,7 @@ import com.dancecube.token.Token;
 import com.dancecube.token.TokenBuilder;
 import com.mirai.event.MainHandler;
 import com.mirai.task.SchedulerTask;
+import org.yaml.snakeyaml.Yaml;
 import net.mamoe.mirai.console.extension.PluginComponentStorage;
 import net.mamoe.mirai.console.plugin.jvm.JavaPlugin;
 import net.mamoe.mirai.console.plugin.jvm.JavaPluginScheduler;
@@ -15,7 +16,7 @@ import net.mamoe.mirai.event.events.MessageEvent;
 import net.mamoe.mirai.event.events.NewFriendRequestEvent;
 import net.mamoe.mirai.event.events.NudgeEvent;
 import org.jetbrains.annotations.NotNull;
-
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.logging.Logger;
@@ -36,12 +37,16 @@ public final class MiraiBot extends JavaPlugin {
         super.onLoad($this$onLoad);
     }
 
+    // 修改后的MiraiBot.java（仅展示变更部分）
     @Override
     public void onEnable() {
         getLogger().info("Plugin loaded!");
         EventChannel<Event> channel = GlobalEventChannel.INSTANCE
                 .parentScope(MiraiBot.INSTANCE)
                 .context(this.getCoroutineContext());
+
+        // 加载数据库配置
+        loadDatabaseConfig();
 
         // 输出加载Token
         onLoadToken();
@@ -54,8 +59,39 @@ public final class MiraiBot extends JavaPlugin {
         channel.subscribeAlways(MessageEvent.class, MainHandler::eventCenter);
         channel.subscribeAlways(NudgeEvent.class, MainHandler::NudgeHandler);
         channel.subscribeAlways(NewFriendRequestEvent.class, MainHandler::addFriendHandler);
-
     }
+
+    // 从CheckIn迁移过来的数据库配置加载方法
+    private void loadDatabaseConfig() {
+        try {
+            Yaml yaml = new Yaml();
+            InputStream inputStream = MiraiBot.class.getClassLoader()
+                    .getResourceAsStream(configPath + "database.yml");
+
+            if (inputStream == null) {
+                throw new RuntimeException("Database configuration file not found");
+            }
+
+            Map<String, Object> config = yaml.load(inputStream);
+            Map<String, String> databaseConfig = (Map<String, String>) config.get("database");
+
+            // 这里需要修改为MiraiBot类中的静态变量
+            JDBC_DRIVER = databaseConfig.get("jdbc-driver");
+            DB_URL = databaseConfig.get("url");
+            USER = databaseConfig.get("username");
+            PASS = databaseConfig.get("password");
+
+            inputStream.close();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to load database configuration", e);
+        }
+    }
+
+    // 添加静态变量存储数据库配置（原CheckIn中的静态变量迁移至此）
+    public static String JDBC_DRIVER;
+    public static String DB_URL;
+    public static String USER;
+    public static String PASS;
 
     @Override
     public void onDisable() {
@@ -111,6 +147,10 @@ public final class MiraiBot extends JavaPlugin {
             sb.append("\nqq: %d , id: %s;".formatted(qq, token.getUserId()));
         }
         Logger.getGlobal().info(("刷新加载成功！共%d条".formatted(userTokensMap.size()) + sb));
+    }
+
+    public void consoleCommands(){
+
     }
 }
 

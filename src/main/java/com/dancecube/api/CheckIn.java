@@ -1,65 +1,29 @@
 package com.dancecube.api;
 
 import com.dancecube.token.Token;
-import org.yaml.snakeyaml.Yaml;
-
-import java.io.InputStream;
+import com.mirai.MiraiBot;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Map;
-import static com.mirai.config.AbstractConfig.configPath;
+// 修改后的CheckIn.java（仅展示变更部分）
 public class CheckIn {
-    private static String JDBC_DRIVER;
-    private static String DB_URL;
-    private static String USER;
-    private static String PASS;
-
-    static {
-        loadDatabaseConfig();
-    }
-
-    private static void loadDatabaseConfig() {
-        try {
-            Yaml yaml = new Yaml();
-            InputStream inputStream = CheckIn.class.getClassLoader()
-                    .getResourceAsStream(configPath + "database.yml");
-
-            if (inputStream == null) {
-                throw new RuntimeException("Database configuration file not found");
-            }
-
-            Map<String, Object> config = yaml.load(inputStream);
-            @SuppressWarnings("unchecked")
-            Map<String, String> databaseConfig = (Map<String, String>) config.get("database");
-
-            JDBC_DRIVER = databaseConfig.get("jdbc-driver");
-            DB_URL = databaseConfig.get("url");
-            USER = databaseConfig.get("username");
-            PASS = databaseConfig.get("password");
-
-            inputStream.close();
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to load database configuration", e);
-        }
-    }
+    // 移除原有的静态变量定义和loadDatabaseConfig方法
 
     public static boolean recordCheckIn(Token token) {
         String sql = "INSERT INTO check_in_records (user_id, check_in_time) VALUES (?, NOW())";
 
         try {
-            // Register JDBC driver
-            Class.forName(JDBC_DRIVER);
+            // 使用MiraiBot中加载的数据库配置
+            Class.forName(MiraiBot.JDBC_DRIVER);
 
-            // Establish connection
-            try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            try (Connection conn = DriverManager.getConnection(
+                    MiraiBot.DB_URL,
+                    MiraiBot.USER,
+                    MiraiBot.PASS);
                  PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-                // Set parameters
                 pstmt.setInt(1, token.getUserId());
-
-                // Execute the query
                 return pstmt.executeUpdate() > 0;
             }
         } catch (SQLException | ClassNotFoundException e) {

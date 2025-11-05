@@ -147,19 +147,19 @@ public class AllCommands {
 
 
 //    @DeclaredCommand("签到")
-//    public static final RegexCommand handleCheckIn = new RegexCommandBuilder()
-//            .multiStrings("签到")
-//            .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
-//                Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
-//                if(token == null) return;
-//
-//                boolean success = CheckIn.recordCheckIn(token);
-//                if (success) {
-//                    contact.sendMessage("签到成功啦~(●'◡'●)");
-//                } else {
-//                    contact.sendMessage("签到失败了💦💦\n重试一下吧！");
-//                }
-//            }).build();
+    public static final RegexCommand handleCheckIn = new RegexCommandBuilder()
+            .multiStrings("签到")
+            .onCall(Scope.GLOBAL, (event, contact, qq, args) -> {
+                Token token = getToken(contact, qq, onNoLoginCall, onInvalidCall);
+                if(token == null) return;
+
+                boolean success = CheckIn.recordCheckIn(token);
+                if (success) {
+                    contact.sendMessage("签到成功啦~(●'◡'●)");
+                } else {
+                    contact.sendMessage("签到失败了💦💦\n重试一下吧！");
+                }
+            }).build();
 
 
     @Deprecated
