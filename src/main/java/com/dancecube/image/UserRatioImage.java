@@ -44,7 +44,6 @@ public class UserRatioImage {
     public static final BufferedImage LV_D;
     public static String path = configPath + "Images/UserRatioImage/";
 
-
     static {
         try {
             // 素材缓存到内存
@@ -310,16 +309,17 @@ public class UserRatioImage {
     }
 
     private static BufferedImage getGradeImage(AccGrade grade) {
-        return switch(grade) {
-            case SSS -> LV_SSS;
-            case SS -> LV_SS;
-            case S -> LV_S;
-            case A -> LV_A;
-            case B -> LV_B;
-            case C -> LV_C;
-            default -> LV_D;
-        };
-    }
+    return switch(grade) {
+        case SSS_AP -> LV_SSS; // 100% 显示为 SSS（或改为专用 LV_S_AP 如果你添加了该图片资源）
+        case SSS -> LV_SSS;
+        case SS -> LV_SS;
+        case S -> LV_S;
+        case A -> LV_A;
+        case B -> LV_B;
+        case C -> LV_C;
+        default -> LV_D;
+    };
+}
 
     private static BufferedImage getCardImage(int difficulty) {
         return switch(difficulty) {
