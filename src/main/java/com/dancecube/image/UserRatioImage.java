@@ -42,11 +42,13 @@ public class UserRatioImage {
     public static final BufferedImage LV_B;
     public static final BufferedImage LV_C;
     public static final BufferedImage LV_D;
+    public static final BufferedImage AP;
     public static String path = configPath + "Images/UserRatioImage/";
 
     static {
         try {
             // 素材缓存到内存
+            AP = ImageIO.read(new File(path + "AP.png"));
             CARD_1 = ImageIO.read(new File(path + "Card1.png"));
             CARD_2 = ImageIO.read(new File(path + "Card2.png"));
             CARD_3 = ImageIO.read(new File(path + "Card3.png"));
@@ -310,7 +312,7 @@ public class UserRatioImage {
 
     private static BufferedImage getGradeImage(AccGrade grade) {
     return switch(grade) {
-        case SSS_AP -> LV_SSS; // 100% 显示为 SSS（或改为专用 LV_S_AP 如果你添加了该图片资源）
+        case SSS_AP -> AP;
         case SSS -> LV_SSS;
         case SS -> LV_SS;
         case S -> LV_S;
@@ -322,29 +324,12 @@ public class UserRatioImage {
 }
 
     private static BufferedImage getCardImage(int difficulty) {
-        return switch(difficulty) {
+        return switch (difficulty) {
             case 0, -1 -> CARD_1; //-1为秀谱
             case 1 -> CARD_2;
             case 2 -> CARD_3;
             default -> CARD_1;
         };
-    }
-
-    @Test
-    public void test() throws IOException {
-        System.out.println("Running...");
-        Token token = new Token(939088,
-                "Tbp4C0QAJeIsqNcJx7psKoYAxFNsD0qH68qutYCZod8ybPiRoEJ05RZhHzy4LPQDtw3tJvKYqSkCpnEd-qrg-c7MMY7DwQecXF3-uuU-6qDd7zIQ7IpfTHbcVHvN_st9XnVCyt9op0b6CYFY3nTvNH1F4aidP5M-P-MXes3-TIH80YHN8zHgua_XjgFWfi0loubYS0KW9APsB0POsoaBmeJz-85ZxnqlOdzUkW7cb9vGPzgQvP7adZPa6igEfynpx1YXTthssnhGyjKdMSQnKkR2Zhmx4zdbwo9N1eTDoAv0ZuNZ9-29gSirqGHbwRS-GXPnXG4mGLvdMuRWY1OKuLk1HWvV-AsceOuMvZX9vin0BcxGDKmK4axbU8kRQkx-");
-        String path = "C:\\Users\\Lin\\IdeaProjects\\DanceCubeBot\\DcConfig\\Images\\result.jpg";
-
-        InputStream image = generate(token);
-        Thumbnails.of(image)
-                .scale(1)
-                .outputFormat("jpg")
-                .toFile(path);
-//        ImageDrawer.write(ImageDrawer.convertPngToJpg(ImageDrawer.read(image),0.5f), path);
-//        ImageDrawer.write(ImageDrawer.read(image), path);
-        System.out.println("Done!");
     }
 
     public static float deltaSeconds(long mills) {
