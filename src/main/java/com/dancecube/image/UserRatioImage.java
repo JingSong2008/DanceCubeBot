@@ -367,14 +367,14 @@ public class UserRatioImage {
 
     public static String getRatioComment(int ratio) {
         String comment;
-        if(ratio<1000) comment = RATIO_COMMENTS[0];
+        if(ratio<=1000) comment = RATIO_COMMENTS[0];
         else if(ratio<1300) comment = RATIO_COMMENTS[1];
         else if(ratio<1500) comment = RATIO_COMMENTS[2];
         else if(ratio<1800) comment = RATIO_COMMENTS[3];
         else if(ratio<1900) comment = RATIO_COMMENTS[4];
         else if(ratio<2000) comment = RATIO_COMMENTS[5];
         else if(ratio<2080) comment = RATIO_COMMENTS[6];
-        else if(ratio<2100) comment = RATIO_COMMENTS[7];
+        else if(ratio<=2100) comment = RATIO_COMMENTS[7];
         else comment = "";
         return comment;
     }
