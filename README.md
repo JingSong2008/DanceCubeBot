@@ -1,4 +1,5 @@
 # DanceCubeBot
+从现在起，本仓库已归档，新仓库：https://github.com/Dancerinbot/DanceCubeBot 。
 
 这是一个基于**Mirai & Java**的舞立方机器人
 
